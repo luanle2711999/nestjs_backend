@@ -19,7 +19,6 @@ exports.PostsService = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
-const mock_data_1 = require("../data/mock_data");
 const create_post_dto_1 = __importDefault(require("../dto/create-post.dto"));
 let PostsService = class PostsService {
     constructor(postService) {
@@ -29,27 +28,18 @@ let PostsService = class PostsService {
         return await this.postService.find();
     }
     getPost(postId) {
-        const id = Number(postId);
         return new Promise((resolve) => {
-            const post = mock_data_1.posts.find((post) => post.id === id);
-            if (!post) {
-                throw new common_1.HttpException('Post not found', 404);
-            }
-            resolve(post);
+            const data = this.postService.findOne(postId);
+            resolve(data);
         });
     }
     async addPost(post) {
         return await this.postService.save(post);
     }
     deletePost(postId) {
-        const id = Number(postId);
         return new Promise((resolve) => {
-            const index = mock_data_1.posts.findIndex((post) => post.id === id);
-            if (index === -1) {
-                throw new common_1.HttpException('Post not found', 404);
-            }
-            mock_data_1.posts.splice(index, 1);
-            resolve(mock_data_1.posts);
+            const itemDeleted = this.postService.delete(postId);
+            resolve(itemDeleted);
         });
     }
 };

@@ -32,7 +32,6 @@ let PostsController = class PostsController {
         return post;
     }
     async addPost(postUpload) {
-        console.log(postUpload);
         const post = await this.postService.addPost(postUpload);
         return post;
     }

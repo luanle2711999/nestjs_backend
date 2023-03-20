@@ -20,6 +20,7 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const create_post_dto_1 = __importDefault(require("./posts/dto/create-post.dto"));
 const posts_module_1 = require("./posts/module/posts.module");
+const posts_resolver_1 = require("./posts/resolver/posts.resolver");
 let AppModule = class AppModule {
     constructor(dataSource) {
         this.dataSource = dataSource;
@@ -41,7 +42,7 @@ AppModule = __decorate([
             posts_module_1.PostsModule,
         ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [app_service_1.AppService, posts_resolver_1.PostsResolver],
     }),
     __metadata("design:paramtypes", [typeorm_2.DataSource])
 ], AppModule);

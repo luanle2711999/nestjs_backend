@@ -1,8 +1,4 @@
-import { ApolloConfig } from '@apollo/server';
-import { ApolloDriverConfig } from '@nestjs/apollo';
-import { ApolloDriver } from '@nestjs/apollo/dist/drivers';
 import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { AppController } from './app.controller';
@@ -22,11 +18,6 @@ import { PostsResolver } from './posts/resolver/posts.resolver';
       database: 'post',
       entities: [CreatePostDto],
       synchronize: true,
-    }),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      autoSchemaFile: 'schema.gql',
-      sortSchema: true,
     }),
     PostsModule,
   ],
